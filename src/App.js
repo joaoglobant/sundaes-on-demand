@@ -1,7 +1,12 @@
 import './App.css'
+import SummaryForm from './pages/SummaryForm/SummaryForm'
 
 function App() {
-  return <div>App</div>
+  return (
+    <div>
+      <SummaryForm />
+    </div>
+  )
 }
 
 export default App
