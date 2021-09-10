@@ -1,0 +1,22 @@
+.wrapper {
+  margin-top: 25px;
+}
+
+.image__wrapper {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.image__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.image {
+  width: 150px;
+  height: 150px;
+  background: #000;
+}
