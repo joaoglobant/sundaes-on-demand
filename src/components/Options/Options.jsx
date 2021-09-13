@@ -11,7 +11,7 @@ const Options = ({ title, eachValue, totalValue, data, checkbox }) => {
       </p>
       <div className='image__wrapper'>
         {data?.map((item, index) => (
-          <div className='image__container' key={item.image / index}>
+          <div className='image__container' key={`${item.image}-${index}`}>
             <img
               data-testid={title}
               className='image'
