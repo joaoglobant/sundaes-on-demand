@@ -15,8 +15,8 @@ export const handlers = [
   rest.get(`${BASE_URL}/toppings`, (req, res, ctx) => {
     return res(
       ctx.json([
-        { name: 'Chocolate', imagePath: '/images/chocolate.png' },
-        { name: 'Vanilla', imagePath: '/images/vanilla.png' },
+        { name: 'Hot fudge', imagePath: '/images/hot-fudge.png' },
+        { name: 'M&Ms', imagePath: '/images/m-and-ms.png' },
         { name: 'Cherries', imagePath: '/images/cherries.png' },
       ])
     )
