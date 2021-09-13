@@ -1,6 +1,7 @@
 import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import SummaryForm from './SummaryForm'
+
 describe('<SummaryForm/>', () => {
   it('should render initial conditions', () => {
     render(<SummaryForm />)

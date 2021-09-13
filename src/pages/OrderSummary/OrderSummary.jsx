@@ -1,32 +1,32 @@
 import React, { useEffect, useState } from 'react'
 import Options from '../../components/Options/Options'
-import { BASE_URL } from '../../mocks/handlers'
 import api from '../../services/api'
 
 const OrderSummary = () => {
   const [scoopsData, setScoopsData] = useState([])
   const [toppingsData, setToppingsData] = useState([])
-  const [error, setError] = useState()
+  const [error, setError] = useState(false)
+  const [error2, setError2] = useState(false)
 
   const getScoops = () => {
     api
-      .get(`${BASE_URL}/scoops`)
+      .get(`http://localhost:3030/scoops`)
       .then(res => {
         setScoopsData(res.data)
       })
       .catch(err => {
-        setError(err.response.data.message)
+        setError(true)
       })
   }
 
   const getToppings = () => {
     api
-      .get(`${BASE_URL}/toppings`)
+      .get(`http://localhost:3030/toppings`)
       .then(res => {
         setToppingsData(res.data)
       })
       .catch(err => {
-        setError(err.response.data.message)
+        setError2(true)
       })
   }
 
@@ -44,7 +44,7 @@ const OrderSummary = () => {
         totalValue='$6.00'
         data={scoopsData}
       />
-      <p>{error}</p>
+      {error && <p>An unexpected error ocurred. Please try again later.</p>}
       <Options
         checkbox
         title='Toppings'
@@ -52,7 +52,7 @@ const OrderSummary = () => {
         totalValue='$4.50'
         data={toppingsData}
       />
-      <p>{error}</p>
+      {error2 && <p>An unexpected error ocurred. Please try again later.</p>}
     </div>
   )
 }

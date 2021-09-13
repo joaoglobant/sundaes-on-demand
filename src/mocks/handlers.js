@@ -1,9 +1,7 @@
 import { rest } from 'msw'
 
-export const BASE_URL = 'http://localhost:3030'
-
 export const handlers = [
-  rest.get(`${BASE_URL}/scoops`, (req, res, ctx) => {
+  rest.get(`http://localhost:3030/scoops`, (req, res, ctx) => {
     return res(
       ctx.json([
         { name: 'Chocolate', imagePath: '/images/chocolate.png' },
@@ -12,7 +10,7 @@ export const handlers = [
     )
   }),
 
-  rest.get(`${BASE_URL}/toppings`, (req, res, ctx) => {
+  rest.get(`http://localhost:3030/toppings`, (req, res, ctx) => {
     return res(
       ctx.json([
         { name: 'Hot fudge', imagePath: '/images/hot-fudge.png' },
