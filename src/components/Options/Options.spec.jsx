@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 
 import Options from './Options'
 
@@ -11,11 +11,11 @@ describe('<Options/>', () => {
         totalValue='$6.00'
         data={[
           {
-            image: 'http://localhost:3000/chocolate.png',
+            imagePath: 'http://localhost:3000/chocolate.png',
             label: 'Chocolate',
           },
           {
-            image: 'http://localhost:3000/vanilla.png',
+            imagePath: 'http://localhost:3000/vanilla.png',
             label: 'Vanilla',
           },
         ]}
@@ -28,6 +28,6 @@ describe('<Options/>', () => {
 
     //confirm alt test of images
     const altText = scoopImages.map(el => el.alt)
-    expect(altText).toEqual(['Chocolate Scoops', 'Vanilla Scoops'])
+    expect(altText).toEqual(['Scoops', 'Scoops'])
   })
 })
