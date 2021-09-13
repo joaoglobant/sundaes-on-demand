@@ -10,9 +10,14 @@ const Options = ({ title, eachValue, totalValue, data, checkbox }) => {
         {title} total: {totalValue}
       </p>
       <div className='image__wrapper'>
-        {data.map(item => (
-          <div className='image__container'>
-            <img className='image' src={item.image} alt={item.item} />
+        {data?.map((item, index) => (
+          <div className='image__container' key={item.image / index}>
+            <img
+              data-testid={title}
+              className='image'
+              src={item.image}
+              alt={`${item.label} ${title}`}
+            />
             {checkbox ? (
               <div>
                 <input type='checkbox' />
