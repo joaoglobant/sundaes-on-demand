@@ -1,5 +1,4 @@
 import React from 'react'
-import { BASE_URL } from '../../mocks/handlers'
 import './styles.css'
 
 const Options = ({ title, eachValue, totalValue, data, checkbox }) => {
@@ -16,7 +15,7 @@ const Options = ({ title, eachValue, totalValue, data, checkbox }) => {
             <img
               data-testid={title}
               className='image'
-              src={`${BASE_URL}${item.imagePath}`}
+              src={`http://localhost:3030${item.imagePath}`}
               alt={title}
             />
             {checkbox ? (
