@@ -1,13 +1,12 @@
-import { render, screen, waitFor } from '@testing-library/react'
+import { render, screen, waitFor } from '../../test-utils/testing-library'
 import userEvent from '@testing-library/user-event'
 import { server } from '../../mocks/server'
 import { rest } from 'msw'
 import OrderSummary from './OrderSummary'
-import { OrderDetailsProvider } from '../../context/OrderDetails.context'
 
 describe('OrderSummary', () => {
   it('should render OrderSummary component with correct number of Scoops list elements', async () => {
-    render(<OrderSummary />, { wrapper: OrderDetailsProvider })
+    render(<OrderSummary />)
     const scoopImages = await screen.findAllByTestId(/Scoops/i)
     expect(scoopImages).toHaveLength(2)
 
@@ -16,7 +15,7 @@ describe('OrderSummary', () => {
   })
 
   it('should render OrderSummary component with correct number of Toppings list elements', async () => {
-    render(<OrderSummary />, { wrapper: OrderDetailsProvider })
+    render(<OrderSummary />)
     const toppingsImages = await screen.findAllByTestId(/Toppings/i)
     expect(toppingsImages).toHaveLength(3)
 
@@ -34,7 +33,7 @@ describe('OrderSummary', () => {
       })
     )
 
-    render(<OrderSummary />, { wrapper: OrderDetailsProvider })
+    render(<OrderSummary />)
 
     await waitFor(async () => {
       const alerts = await screen.findAllByText(
@@ -45,7 +44,7 @@ describe('OrderSummary', () => {
   })
 
   it('should update scoop subtotal when scoops change', async () => {
-    render(<OrderSummary />, { wrapper: OrderDetailsProvider })
+    render(<OrderSummary />)
 
     // make sture starts out 0,00
     const scoopsSubtotal = screen.getByText('Scoops total:', { exact: false })
@@ -61,6 +60,6 @@ describe('OrderSummary', () => {
     const chocolateVanilla = await screen.findByLabelText('Chocolate')
     userEvent.clear(chocolateVanilla)
     userEvent.type(chocolateVanilla, '2')
-    expect(scoopsSubtotal).toHaveTextContent('6.00')
+    expect(scoopsSubtotal).toHaveTextContent('4.00')
   })
 })
