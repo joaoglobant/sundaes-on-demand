@@ -1,12 +1,13 @@
 import { render, screen, waitFor } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import { server } from '../../mocks/server'
 import { rest } from 'msw'
 import OrderSummary from './OrderSummary'
+import { OrderDetailsProvider } from '../../context/OrderDetails.context'
 
 describe('OrderSummary', () => {
   it('should render OrderSummary component with correct number of Scoops list elements', async () => {
-    render(<OrderSummary />)
-
+    render(<OrderSummary />, { wrapper: OrderDetailsProvider })
     const scoopImages = await screen.findAllByTestId(/Scoops/i)
     expect(scoopImages).toHaveLength(2)
 
@@ -15,8 +16,7 @@ describe('OrderSummary', () => {
   })
 
   it('should render OrderSummary component with correct number of Toppings list elements', async () => {
-    render(<OrderSummary />)
-
+    render(<OrderSummary />, { wrapper: OrderDetailsProvider })
     const toppingsImages = await screen.findAllByTestId(/Toppings/i)
     expect(toppingsImages).toHaveLength(3)
 
@@ -34,7 +34,7 @@ describe('OrderSummary', () => {
       })
     )
 
-    render(<OrderSummary />)
+    render(<OrderSummary />, { wrapper: OrderDetailsProvider })
 
     await waitFor(async () => {
       const alerts = await screen.findAllByText(
@@ -42,5 +42,25 @@ describe('OrderSummary', () => {
       )
       expect(alerts).toHaveLength(2)
     })
+  })
+
+  it('should update scoop subtotal when scoops change', async () => {
+    render(<OrderSummary />, { wrapper: OrderDetailsProvider })
+
+    // make sture starts out 0,00
+    const scoopsSubtotal = screen.getByText('Scoops total:', { exact: false })
+    expect(scoopsSubtotal).toHaveTextContent('0.00')
+
+    //update vanila scoops to 1 and check the subtotal
+    const vanillaInput = await screen.findByLabelText('Vanilla')
+    userEvent.clear(vanillaInput)
+    userEvent.type(vanillaInput, '1')
+    expect(scoopsSubtotal).toHaveTextContent('2.00')
+
+    // update chocalate scoops to 2 and  check subtotal
+    const chocolateVanilla = await screen.findByLabelText('Chocolate')
+    userEvent.clear(chocolateVanilla)
+    userEvent.type(chocolateVanilla, '2')
+    expect(scoopsSubtotal).toHaveTextContent('6.00')
   })
 })
